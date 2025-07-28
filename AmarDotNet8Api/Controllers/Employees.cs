@@ -36,13 +36,14 @@ namespace AmarDotNet8Api.Controllers
         public async Task<IActionResult> Create(Employee employee)
         {
             await _employeeService.AddEmployeeAsync(employee);
-            return CreatedAtAction(nameof(GetById), new { id = employee.Id }, employee);
+
+            return CreatedAtAction(nameof(GetById), new { id = employee.EmployeeID }, employee);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Employee updatedEmployee)
         {
-            if (id != updatedEmployee.Id)
+            if (id != updatedEmployee.EmployeeID)
                 return BadRequest("ID mismatch");
 
             await _employeeService.UpdateEmployeeAsync(updatedEmployee);
