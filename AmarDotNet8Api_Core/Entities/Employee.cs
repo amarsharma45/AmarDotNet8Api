@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AmarDotNet8Api_Core.Entities
 {
+    [Table("Employee")]
     public class Employee
     {
         public int EmployeeID { get; set; }               

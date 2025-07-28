@@ -7,7 +7,7 @@ namespace AmarDotNet8Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly EmployeeService _employeeService;
