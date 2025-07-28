@@ -32,16 +32,18 @@ namespace AmarDotNet8Api.Controllers
 
         private string GenerateJwtToken(string username)
         {
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "ThisIsASecretKeyForJwtToken123!");
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "fallback-secret");
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, username)
-                }),
+            new Claim(ClaimTypes.Name, username)
+        }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
