@@ -20,8 +20,19 @@ namespace AmarDotNet8Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetAll()
         {
-            var employees = await _employeeService.GetAllEmployeesAsync();
-            return Ok(employees);
+            try
+            {
+                var employees = await _employeeService.GetAllEmployeesAsync();
+                return Ok(employees);
+            }
+            catch (Exception ex)
+            {
+                // Log full stack trace (optional)
+                Console.WriteLine(ex.ToString());
+
+                // Return full error to Postman temporarily
+                return StatusCode(500, new { message = "Internal Error", error = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
