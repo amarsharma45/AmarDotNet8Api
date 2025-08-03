@@ -21,11 +21,12 @@ namespace AmarDotNet8Api.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             // Dummy user validation
-            if (request.Username == "admin" && request.Password == "password123")
+            if ((request.Username == "admin" && request.Password == "password123") || request.Username== "guest" && request.Password== "guest")
             {
                 var token = GenerateJwtToken(request.Username);
                 return Ok(new { token });
             }
+
 
             return Unauthorized("Invalid credentials");
         }
